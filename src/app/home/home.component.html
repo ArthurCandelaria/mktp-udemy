@@ -1,0 +1,95 @@
+<div class="container mb-5">
+
+  <div class="secao">
+    <h3 class="text-center">Aproveite as super ofertas que separamos para você:</h3>
+  </div>
+
+  <hr />
+
+  <div class="d-flex align-items-center">
+
+    <div class="col-8 row">
+      <input type="text" class="form-control col-6" aria-label="pesquisar" placeholder="nome da promoção"
+        (keyup)="$event.key === 'Enter' ? searchPromoName() : lengthPromoName()" [(ngModel)]="pessoa.nome">
+      <a (click)="getOfertasServices()" id="search" class="btn btn-primary col-2 ml-2 text-white pointer disabled"><i
+          class="fa fa-search"></i>
+        pesquisar</a>
+      <a (click)="clearPromoName()" id="clear"
+        class="btn btn-primary col-1 ml-2 text-white pointer d-flex justify-content-center align-items-center disabled"><i
+          class="fa fa-times-circle-o" style="font-size: 25px;"></i></a>
+    </div>
+
+    <div class="col-4 d-flex justify-content-end">
+      <label class="switch m-0">
+        <input id="destaques" type="checkbox">
+        <span (click)="destaquesFilter()" class="slider round"></span>
+      </label>
+      <p class="mt-1 ml-2 mb-0">destaques</p>
+    </div>
+
+  </div>
+
+  <hr />
+
+
+  <div class="row">
+
+    <div class="col-md-4">
+      <select (change)="estadoSelected($event)" id="estados" class="form-control">
+        <option value="" disabled>selecione seu estado</option>
+        <option *ngFor="let estado of estados" value={{estado.id}}>
+          <!--<span [innerText]=estado.sigla></span> - --><span [innerText]=estado.nome></span>
+        </option>
+      </select>
+    </div>
+
+    <div [ngClass]="visible ? '' : 'hidden'" class="col-md-4">
+      <select (change)="municipioSelected($event)" id="municipio" class="form-control">
+        <option value="" disabled>selecione seu município</option>
+        <option *ngFor="let municipio of municipios" value={{municipio.id}}>
+          <span [innerText]=municipio.nome></span>
+        </option>
+      </select>
+    </div>
+
+  </div>
+
+  <hr />
+
+  <section>
+
+    <div [ngClass]="isLoading ? 'loading' : ''">
+
+      <div class="d-flex justify-content-center">
+        <p *ngIf="ofertas.length >= 1 && !isLoading">quantidade de ofertas: <span [innerText]="ofertas.length"></span>
+        </p>
+        <p *ngIf="ofertas.length == 0 && !isLoading">nenhuma oferta disponível</p>
+      </div>
+
+      <div class="row justify-content-center">
+
+        <ng-container *ngFor="let oferta of ofertas">
+          <div class="m-2 p-0" style="width: 30%;">
+            <div class="card">
+              <img class="card-img-top" [src]="oferta.imagens[0].url">
+              <ng-container *ngIf=oferta.destaque>
+                <img class="img-destaque" src="../../assets/star.png">
+              </ng-container>
+              <div class="card-block p-2">
+                <h4 [innerText]=oferta.titulo class="card-title"></h4>
+                <p [innerText]=oferta.descricao_oferta class="card-text"></p>
+                <p class="preco">{{oferta.valor | currency:'BRL':true}}</p>
+                <p><small [innerText]=oferta.estado></small> - <small [innerText]=oferta.cidade></small></p>
+                <a href="#" class="btn btn-outline-primary mb-2">Ver oferta</a>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

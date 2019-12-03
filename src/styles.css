@@ -1,1 +1,57 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+    background: #efeeee;
+}
+
+h5 {
+    color:#49c5b1
+}
+
+h4 {
+    color:#49c5b1
+}
+
+h3 {
+    color: #49c5b1
+}
+
+a {
+    color: #008578
+}
+
+.card {
+    border: 1.2px solid #bbb !important;
+}
+
+.card img {
+    height: 200px;
+}
+
+.card-text {
+    min-height: 50px;
+}
+
+.secao {
+    margin-top: 30px;
+    margin-bottom: 30px
+}
+
+.preco {
+    color: #f60;
+    font-weight: bold;
+    font-size: 20px
+}
+
+.hidden {
+    display: none;
+}
+
+.btn-outline-primary {
+    color: #008578;
+    border-color: #008578;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #008578;
+    border-color: #008578;
+}

@@ -1,0 +1,26 @@
+.pointer {
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #008578;
+    border-color: #008578;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #49c5b1;
+    border-color: #49c5b1;
+}
+
+.img-destaque {
+    height: 40px;
+    width: 40px;
+    padding: 8px;
+    margin: 5px;
+    position: absolute;
+    right: 0;
+    background: #383838;
+    border-radius: 50%;
+}
