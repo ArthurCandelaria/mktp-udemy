@@ -1,0 +1,31 @@
+h1 {
+    color: #555
+}
+
+.oferta {
+    margin-top: 25px
+}
+
+.oferta img {
+    width: 400px;
+    height: auto;
+}
+
+.thumbnails {
+    margin-top: 10px;
+    overflow-y: scroll;
+    height: 270px;
+    overflow-x: hidden;
+}
+
+.thumbnails img {
+    width: 124px;
+    height: 80px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.valor {
+    right: 0;
+}

@@ -5,7 +5,7 @@ import { GeoService } from './../services/geo.services';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.css','../app.component.css'],
   providers: [OfertasService, GeoService]
 })
 export class HomeComponent implements OnInit {

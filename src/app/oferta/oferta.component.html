@@ -1,0 +1,75 @@
+<div [ngClass]="isLoading ? 'loading' : ''" class="container">
+  <div *ngIf="oferta" class="oferta">
+
+    <div class="row">
+      <div class="col">
+        <h4>{{oferta.anunciante}} - {{oferta.descricao_oferta}}</h4>
+      </div>
+    </div>
+
+    <div [ngClass]="isLoading ? 'd-none' : ''" class="mt-4 card row">
+      <div class="col-md-7 row align-items-center">
+
+        <div class="col-md-3 thumbnails">
+          <ng-container *ngFor="let img of imgs">
+            <img (click)="selectPhoto($event)" [src]="img.url">
+          </ng-container>
+        </div>
+
+        <div class="col-md-9 img_capa">
+          <img id="imgView" *ngIf="selectedPhoto" [src]="selectedPhoto">
+        </div>
+
+      </div>
+
+      <div class="col-md-5 position-absolute mt-5 valor">
+        <div class="row">
+          <div class="col text-center">
+            <p>Por apenas</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col text-center">
+            <h1>{{oferta.valor | currency:'BRL':true}}</h1>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col text-center">
+            <button type="button" class="btn btn-warning btn-lg">Adicionar ao carrinho</button>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="mx-5" />
+
+      <div class="m-3">
+        <div>
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" id="use-tab" data-toggle="tab" href="#use" role="tab" aria-controls="use"
+                aria-selected="true">Como usar?</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="local-tab" data-toggle="tab" href="#local" role="tab" aria-controls="local"
+                aria-selected="false">Onde fica?</a>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content m-4" id="myTabContent">
+          <div class="tab-pane fade show active" id="use" role="tabpanel" aria-labelledby="use-tab">
+            <app-como-usar></app-como-usar>
+          </div>
+          <div class="tab-pane fade" id="local" role="tabpanel" aria-labelledby="profile-tab">
+            <app-onde-fica></app-onde-fica>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

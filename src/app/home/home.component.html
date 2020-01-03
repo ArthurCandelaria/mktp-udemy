@@ -1,4 +1,4 @@
-<div class="container mb-5">
+<div class="container">
 
   <div class="secao">
     <h3 class="text-center">Aproveite as super ofertas que separamos para você:</h3>
@@ -10,7 +10,7 @@
 
     <div class="col-8 row">
       <input type="text" class="form-control col-6" aria-label="pesquisar" placeholder="nome da promoção"
-        (keyup)="$event.key === 'Enter' ? searchPromoName() : lengthPromoName()" [(ngModel)]="pessoa.nome">
+        (keyup)="$event.key === 'Enter' ? getOfertasServices() : lengthPromoName()" [(ngModel)]="pessoa.nome">
       <a (click)="getOfertasServices()" id="search" class="btn btn-primary col-2 ml-2 text-white pointer disabled"><i
           class="fa fa-search"></i>
         pesquisar</a>
@@ -63,7 +63,7 @@
       <div class="d-flex justify-content-center">
         <p *ngIf="ofertas.length >= 1 && !isLoading">quantidade de ofertas: <span [innerText]="ofertas.length"></span>
         </p>
-        <p *ngIf="ofertas.length == 0 && !isLoading">nenhuma oferta disponível</p>
+        <p class="alert alert-light w-100" *ngIf="ofertas.length == 0 && !isLoading">nenhuma oferta disponível</p>
       </div>
 
       <div class="row justify-content-center">
@@ -80,7 +80,7 @@
                 <p [innerText]=oferta.descricao_oferta class="card-text"></p>
                 <p class="preco">{{oferta.valor | currency:'BRL':true}}</p>
                 <p><small [innerText]=oferta.estado></small> - <small [innerText]=oferta.cidade></small></p>
-                <a href="#" class="btn btn-outline-primary mb-2">Ver oferta</a>
+                <a [routerLink]="['/oferta', oferta.id]" class="btn btn-outline-primary mb-2">Ver oferta</a>
               </div>
             </div>
           </div>

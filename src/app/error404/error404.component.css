@@ -1,0 +1,16 @@
+h1 { margin:-180px 0 300px 0; font-size:2em }
+h3 { margin:50px 0 0 0; font-size:20em; opacity:0.3; }
+    
+@media (max-width: 606px) 
+{
+  h3 
+   {
+    font-size: 15em;
+    font-size: 10em;
+   }
+
+   h1
+   {
+       margin: 0;
+   }
+}

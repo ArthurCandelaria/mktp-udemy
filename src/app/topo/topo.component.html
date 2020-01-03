@@ -1,7 +1,8 @@
 <div class="fixed-top">
+
   <nav class="navbar navbar-light bg-faded">
     <div class="container">
-      <a href="#" class="navbar-brand">
+      <a routerLink="/home" class="navbar-brand">
         <img class="logo" src="/assets/logo.png" />
       </a>
       <a href="#"><img src="/assets/packe.png" />
@@ -16,17 +17,21 @@
     <div class="container">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Restaurantes</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/home"><i class="fa fa-home fa-2x" aria-hidden="true"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Diversão</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/restaurantes">Restaurantes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Cadastro</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/diversao">Diversão</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/cadastro">Cadastro</a>
         </li>
       </ul>
     </div>
   </div>
+
 </div>
 
 <div class="banner">

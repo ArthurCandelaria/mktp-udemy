@@ -1,0 +1,49 @@
+.pointer {
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #008578;
+    border-color: #008578;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #49c5b1;
+    border-color: #49c5b1;
+}
+
+.img-destaque {
+    height: 40px;
+    width: 40px;
+    padding: 8px;
+    margin: 5px;
+    position: absolute;
+    right: 0;
+    background: #383838;
+    border-radius: 50%;
+}
+
+.min-height {
+    min-height: 803px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #efeeee; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #555; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #49c5b1; 
+  }
