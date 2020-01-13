@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { OfertasService } from './../services/ofertas.services';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute } from '@angular/router';
+import { TopoComponent } from '../topo/topo.component'
 
 @Component({
   selector: 'app-oferta',
   templateUrl: './oferta.component.html',
   styleUrls: ['./oferta.component.css', '../app.component.css'],
-  providers: [OfertasService]
+  providers: [OfertasService, TopoComponent]
 })
 
 export class OfertaComponent implements OnInit {
@@ -19,7 +20,8 @@ export class OfertaComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private ofertasService: OfertasService
+    private ofertasService: OfertasService,
+    public topoComponent: TopoComponent
   ) { }
 
   ngOnInit() {
@@ -52,6 +54,11 @@ export class OfertaComponent implements OnInit {
     console.log(imgView)
     console.log(srcImage);
     imgView.setAttribute('src', srcImage)
+  }
+
+  implementCarrinho(event) {
+    this.topoComponent.carrinho.push(event)
+    console.log(this.topoComponent.carrinho)
   }
 
 }
