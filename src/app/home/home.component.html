@@ -31,14 +31,14 @@
 
   <hr />
 
-
   <div class="row">
 
     <div class="col-md-4">
       <select (change)="estadoSelected($event)" id="estados" class="form-control">
         <option value="" disabled>selecione seu estado</option>
         <option *ngFor="let estado of estados" value={{estado.id}}>
-          <!--<span [innerText]=estado.sigla></span> - --><span [innerText]=estado.nome></span>
+          <!--<span [innerText]=estado.sigla></span> - -->
+          <span [innerText]=estado.nome></span>
         </option>
       </select>
     </div>
