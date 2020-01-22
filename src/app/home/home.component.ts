@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   endpoint = ''
   isLoading: boolean
   destaque = false
-  pessoa = {
+  oferta = {
     nome: ''
   }
 
@@ -51,8 +51,6 @@ export class HomeComponent implements OnInit {
   }
 
   destaquesFilter() {
-    // let input = document.querySelector('#destaques') as HTMLInputElement
-    // if (input.checked) {
     this.destaque = !this.destaque
     if (this.destaque) {
       this.endpoint = '?destaque=true'
@@ -99,11 +97,11 @@ export class HomeComponent implements OnInit {
   }
 
   searchPromoName(_success) {
-    if (this.pessoa.nome.length > 0) {
-      let promoName = this.pessoa.nome.toUpperCase()
-      console.log('promoName ', promoName)
+    if (this.oferta.nome.length > 0) {
+      let promoName = this.oferta.nome.toUpperCase()
+      // console.log('promoName ', promoName)
       let data = _success.filter(x => x.titulo.toUpperCase().indexOf(promoName) > -1)
-      console.log(data)
+      // console.log(data)
       return data
     } else {
       return _success
@@ -111,15 +109,14 @@ export class HomeComponent implements OnInit {
   }
 
   clearPromoName() {
-    this.pessoa.nome = ''
+    this.oferta.nome = ''
     document.querySelector('#search').classList.add('disabled')
     document.querySelector('#clear').classList.add('disabled')
     this.getOfertasServices()
   }
 
   lengthPromoName() {
-    console.log(this.pessoa.nome.length)
-    if (this.pessoa.nome.length <= 0) {
+    if (this.oferta.nome.length <= 0) {
       document.querySelector('#search').classList.add('disabled')
       document.querySelector('#clear').classList.add('disabled')
     } else {
