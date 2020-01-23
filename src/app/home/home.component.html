@@ -9,8 +9,10 @@
   <div class="d-flex align-items-center">
 
     <div class="col-8 row">
+      <!-- Variavel de referencia pode ser enviada como um evento de um metodo... getOfertasServices(variavelDeReferencia.value) -->
       <input type="text" class="form-control col-6" aria-label="pesquisar" placeholder="Pesquise por ofertas"
-        (keyup)="$event.key === 'Enter' ? getOfertasServices() : lengthPromoName()" [(ngModel)]="oferta.nome">
+        #variavelDeReferencia (keyup)="$event.key === 'Enter' ? getOfertasServices() : lengthPromoName()"
+        [(ngModel)]="oferta.nome">
       <a (click)="getOfertasServices()" id="search" class="btn btn-primary col-2 ml-2 text-white pointer disabled"><i
           class="fa fa-search"></i>
         pesquisar</a>
