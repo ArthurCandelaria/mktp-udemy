@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OfertasService } from './../services/ofertas.services';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-diversao',
@@ -14,6 +15,7 @@ export class DiversaoComponent implements OnInit {
   endpoint: string
 
   constructor(
+    private router: ActivatedRoute,
     private ofertasService: OfertasService
   ) { }
 
@@ -23,7 +25,7 @@ export class DiversaoComponent implements OnInit {
 
   getOfertasServices() {
     this.isLoading = true
-    this.endpoint = this.ofertasService.getUrl()
+    this.endpoint = '?categoria=' + this.router.snapshot.url
     setTimeout(() => {
       this.ofertasService.getOfertas(this.endpoint).subscribe(
         success => {

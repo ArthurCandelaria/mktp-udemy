@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { OfertasService } from '../services/ofertas.services';
 import { GeoService } from './../services/geo.services';
+import { ErrorService } from './../services/error.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css', '../app.component.css'],
-  providers: [OfertasService, GeoService]
+  providers: [OfertasService, GeoService, ErrorService]
 })
 export class HomeComponent implements OnInit {
 
@@ -24,10 +25,12 @@ export class HomeComponent implements OnInit {
   oferta = {
     nome: ''
   }
+  msgError: string
 
   constructor(
     private ofertasService: OfertasService,
-    private geoService: GeoService
+    private geoService: GeoService,
+    private formatError: ErrorService
   ) { }
 
   ngOnInit() {
@@ -44,6 +47,11 @@ export class HomeComponent implements OnInit {
           this.ofertas = success
           this.ofertas = this.searchPromoName(this.ofertas)
           console.log(this.ofertas)
+          this.isLoading = false
+        },
+        error => {
+          this.msgError = this.formatError.formatErrorResponse(error)
+          console.log(this.msgError)
           this.isLoading = false
         }
       )

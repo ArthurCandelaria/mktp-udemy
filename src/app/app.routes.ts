@@ -10,7 +10,7 @@ import { Error404Component } from './error404/error404.component'
 export const routs: Routes = [
     { path: '', component: HomeComponent },
     { path: 'home', component: HomeComponent },
-    { path: 'restaurantes', component: RestaurantesComponent },
+    { path: 'restaurante', component: RestaurantesComponent },
     { path: 'diversao', component: DiversaoComponent },
     { path: 'cadastro', component: CadastroComponent },
     { path: 'oferta', component: HomeComponent },

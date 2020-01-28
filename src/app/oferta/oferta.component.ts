@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OfertasService } from './../services/ofertas.services';
 import { ActivatedRoute } from '@angular/router';
 import { TopoComponent } from '../topo/topo.component';
+import { ErrorService } from './../services/error.service';
 // import { Observable } from 'rxjs/Observable';
 // import { Observer } from 'rxjs/Observer';
 // import { Subscription } from 'rxjs/Subscription';
@@ -11,7 +12,7 @@ import { TopoComponent } from '../topo/topo.component';
   selector: 'app-oferta',
   templateUrl: './oferta.component.html',
   styleUrls: ['./oferta.component.css', '../app.component.css'],
-  providers: [OfertasService, TopoComponent]
+  providers: [OfertasService, TopoComponent, ErrorService]
 })
 
 export class OfertaComponent implements OnInit, OnDestroy {
@@ -21,6 +22,7 @@ export class OfertaComponent implements OnInit, OnDestroy {
   imgs = []
   endpoint: string
   selectedPhoto: any
+  msgError: string
 
   // meuObservableTesteSubscription: Subscription
   // tempoObservableSubscription: Subscription
@@ -28,6 +30,7 @@ export class OfertaComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private ofertasService: OfertasService,
+    private formatError: ErrorService,
     public topoComponent: TopoComponent
   ) { }
 
@@ -75,13 +78,19 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   getOfertasService() {
     this.isLoading = true
-    this.endpoint = '/?id=' + this.route.snapshot.paramMap.get('id')
+    this.endpoint = '/?id=' + this.route.snapshot.params['id']
+    // this.endpoint = '/?id=' + this.route.snapshot.paramMap.get('id')
     setTimeout(() => {
       this.ofertasService.getOfertas(this.endpoint).subscribe(
         success => {
           this.oferta = success[0]
           this.imgs = this.oferta.imagens
           this.selectedPhoto = this.imgs[0].url
+          this.isLoading = false
+        },
+        error => {
+          this.msgError = this.formatError.formatErrorResponse(error)
+          console.log(this.msgError)
           this.isLoading = false
         }
       )

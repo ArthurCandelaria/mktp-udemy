@@ -1,7 +1,8 @@
 import { Http } from '@angular/http'
 import { Injectable } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
-import 'rxjs/add/operator/map';
+// import { ActivatedRoute } from '@angular/router'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/retry'
 
 @Injectable()
 
@@ -10,24 +11,12 @@ export class OfertasService {
     url = 'http://localhost:3000/ofertas'
 
     constructor(
-        private route: ActivatedRoute,
+        // private route: ActivatedRoute,
         private http: Http
     ) { }
 
-    getUrl() {
-        const url = window.location.href
-        switch (url.substring(url.lastIndexOf('/') + 1)) {
-            case 'restaurantes':
-                return '?categoria=restaurante'
-            case 'diversao':
-                return '?categoria=diversao'
-            default:
-                return ''
-        }
-    }
-
     getOfertas(endpoint) {
-        return this.http.get(this.url + endpoint)
+        return this.http.get(this.url + endpoint).retry(10)
             .map(res => res.json());
     }
 
