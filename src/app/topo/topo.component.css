@@ -12,9 +12,9 @@
     color: #383838;
 }
 
-.nav-link:hover{
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#eee),to(#fcfcfc));
-    background-image: linear-gradient(#eee,#fcfcfc);
+.nav-link:hover {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fcfcfc));
+    background-image: linear-gradient(#eee, #fcfcfc);
 }
 
 .banner {
@@ -28,8 +28,8 @@
 
 .active {
     color: #008578;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#eee),to(#fcfcfc));
-    background-image: linear-gradient(#eee,#fcfcfc);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fcfcfc));
+    background-image: linear-gradient(#eee, #fcfcfc);
 }
 
 .navbar {
