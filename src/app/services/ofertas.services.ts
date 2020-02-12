@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core'
 // import { ActivatedRoute } from '@angular/router'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/retry'
+import { Observable } from 'rxjs/Observable'
 
 @Injectable()
 
@@ -18,6 +19,11 @@ export class OfertasService {
     getOfertas(endpoint) {
         return this.http.get(this.url + endpoint).retry(10)
             .map(res => res.json());
+    }
+
+    searchOfertas(termo) {
+        return this.http.get(this.url + '?descricao_oferta_like=' + termo)
+            .map(res => res.json())
     }
 
 }

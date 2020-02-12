@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { OfertasService } from '../services/ofertas.services';
 import { GeoService } from './../services/geo.services';
 import { ErrorService } from './../services/error.service';
+// import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/finally';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +17,7 @@ import { ErrorService } from './../services/error.service';
 export class HomeComponent implements OnInit {
 
   ofertas = []
+  ofertasSearch: any
   estados = []
   municipios = []
   idEstado: any
@@ -26,6 +32,8 @@ export class HomeComponent implements OnInit {
     nome: ''
   }
   msgError: string
+  // ofertasSearch: Observable<any>
+  subjectPesquisa = new Subject()
 
   constructor(
     private ofertasService: OfertasService,
@@ -34,6 +42,28 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.ofertasSearch = this.subjectPesquisa
+      .debounceTime(1000)
+      .switchMap(() => {
+        console.log('requisição http para api')
+        return this.ofertasService.searchOfertas(this.oferta.nome)
+      })
+
+    this.ofertasSearch
+      .subscribe(
+        success => {
+          this.isLoading = true
+          this.ofertas = []
+          setTimeout(() => {
+            success.forEach(element => {
+              this.ofertas.push(element)
+            });
+            this.isLoading = false
+          }, 1000);
+        }
+      )
+
     this.getOfertasServices();
     this.getEstadosServices();
   }
@@ -42,20 +72,39 @@ export class HomeComponent implements OnInit {
     this.isLoading = true
     this.ofertas = []
     setTimeout(() => {
-      this.ofertasService.getOfertas(this.endpoint).subscribe(
-        success => {
-          this.ofertas = success
-          this.ofertas = this.searchPromoName(this.ofertas)
-          console.log(this.ofertas)
-          this.isLoading = false
-        },
-        error => {
-          this.msgError = this.formatError.formatErrorResponse(error)
-          console.log(this.msgError)
-          this.isLoading = false
-        }
-      )
+      this.ofertasService.getOfertas(this.endpoint)
+        .finally(() => this.isLoading = false)
+        .subscribe(
+          success => {
+            this.ofertas = success
+            this.ofertas = this.searchPromoName(this.ofertas)
+            console.log(this.ofertas)
+          },
+          error => {
+            this.msgError = this.formatError.formatErrorResponse(error)
+            console.log('msg error: ', this.msgError)
+          }
+        )
     }, 1000);
+  }
+
+  pesquisa() {
+
+    // this.ofertasService.searchOfertas(termo)
+    //   .finally(() => console.log('fim da stream de eventos'))
+    //   .subscribe(
+    //     success => {
+    //       console.log(success)
+    //     },
+    //     error => {
+    //       this.msgError = this.formatError.formatErrorResponse(error)
+    //       console.log('msg error: ', this.msgError)
+    //     }
+    //   )
+
+    console.log('keyup caracter: ', this.oferta.nome)
+    this.subjectPesquisa.next(this.oferta.nome)
+
   }
 
   destaquesFilter() {
@@ -124,10 +173,11 @@ export class HomeComponent implements OnInit {
   }
 
   lengthPromoName() {
-    if (this.oferta.nome.length <= 0) {
+    if (this.oferta.nome.length < 0) {
       document.querySelector('#search').classList.add('disabled')
       document.querySelector('#clear').classList.add('disabled')
     } else {
+      this.pesquisa()
       document.querySelector('#search').classList.remove('disabled')
       document.querySelector('#clear').classList.remove('disabled')
     }
