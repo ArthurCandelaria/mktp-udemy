@@ -8,20 +8,28 @@
 
   <div class="d-flex align-items-center">
 
-    <div class="col-8 row">
+    <div class="col-5">
       <!-- Variavel de referencia pode ser enviada como um evento de um metodo... getOfertasServices(variavelDeReferencia.value) -->
-      <input type="text" class="form-control col-6" aria-label="pesquisar" placeholder="Pesquise por ofertas"
-        #variavelDeReferencia (keyup)="$event.key === 'Enter' ? getOfertasServices() : lengthPromoName()"
-        [(ngModel)]="oferta.nome">
-      <a (click)="getOfertasServices()" id="search" class="btn btn-primary col-2 ml-2 text-white pointer disabled"><i
+      <div>
+        <input type="text" class="form-control" aria-label="pesquisar" placeholder="pesquise por ofertas..."
+          #variavelDeReferencia (keyup)="$event.key === 'Enter' ? getOfertasServices() : lengthPromoName()"
+          [(ngModel)]="oferta.nome">
+        <ul class="list-group position-absolute col-12" style="z-index: 1; padding-right: 30px;">
+          <li *ngFor="let oferta2 of ofertas2" class="list-group-item w-100">{{oferta2.descricao_oferta}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-5 d-flex justify-content-start align-self-start">
+      <a (click)="getOfertasServices()" id="search" class="btn btn-primary col-5 text-white pointer disabled"><i
           class="fa fa-search"></i>
         pesquisar</a>
       <a (click)="clearPromoName()" id="clear"
-        class="btn btn-primary col-1 ml-2 text-white pointer d-flex justify-content-center align-items-center disabled"><i
+        class="btn btn-primary col-3 ml-2 text-white pointer d-flex justify-content-center align-items-center disabled"><i
           class="fa fa-times-circle-o" style="font-size: 25px;"></i></a>
     </div>
 
-    <div class="col-4 d-flex justify-content-end">
+    <div class="col-2 d-flex justify-content-end align-self-start">
       <label class="switch m-0">
         <input id="destaques" type="checkbox">
         <span (click)="destaquesFilter()" class="slider round"></span>
@@ -33,7 +41,7 @@
 
   <hr />
 
-  <div class="row">
+  <div class="row col-12">
 
     <div class="col-md-4">
       <select (change)="estadoSelected($event)" id="estados" class="form-control">

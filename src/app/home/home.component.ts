@@ -7,6 +7,7 @@ import 'rxjs/add/operator/finally';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
 
   ofertas = []
   ofertasSearch: any
+  ofertas2 = []
   estados = []
   municipios = []
   idEstado: any
@@ -44,23 +46,26 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
     this.ofertasSearch = this.subjectPesquisa
-      .debounceTime(1000)
+      .debounceTime(500)
+      .distinctUntilChanged()
       .switchMap(() => {
         console.log('requisição http para api')
-        return this.ofertasService.searchOfertas(this.oferta.nome)
+        if (this.oferta.nome.trim() == '') {
+          this.ofertas2 = []
+        } else {
+          return this.ofertasService.searchOfertas(this.oferta.nome)
+        }
       })
 
     this.ofertasSearch
       .subscribe(
         success => {
           this.isLoading = true
-          this.ofertas = []
-          setTimeout(() => {
-            success.forEach(element => {
-              this.ofertas.push(element)
-            });
-            this.isLoading = false
-          }, 1000);
+          this.ofertas2 = []
+          success.forEach(element => {
+            this.ofertas2.push(element)
+          });
+          this.isLoading = false
         }
       )
 
@@ -173,7 +178,7 @@ export class HomeComponent implements OnInit {
   }
 
   lengthPromoName() {
-    if (this.oferta.nome.length < 0) {
+    if (this.oferta.nome.length <= 0) {
       document.querySelector('#search').classList.add('disabled')
       document.querySelector('#clear').classList.add('disabled')
     } else {
