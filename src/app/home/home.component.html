@@ -15,7 +15,8 @@
           #variavelDeReferencia (keyup)="$event.key === 'Enter' ? getOfertasServices() : lengthPromoName()"
           [(ngModel)]="oferta.nome">
         <ul class="list-group position-absolute col-12" style="z-index: 1; padding-right: 30px;">
-          <li *ngFor="let oferta2 of ofertas2" class="list-group-item w-100">{{oferta2.descricao_oferta}}</li>
+          <li *ngFor="let oferta2 of ofertas2" class="list-group-item reduceText w-100">{{oferta2.descricao_oferta | lowercase}}
+          </li>
         </ul>
       </div>
     </div>

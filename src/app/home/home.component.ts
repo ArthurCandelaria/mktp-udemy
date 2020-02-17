@@ -46,12 +46,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
     this.ofertasSearch = this.subjectPesquisa
-      .debounceTime(500)
+      .debounceTime(250)
       .distinctUntilChanged()
       .switchMap(() => {
         console.log('requisição http para api')
         if (this.oferta.nome.trim() == '') {
-          this.ofertas2 = []
+          return this.ofertas2 = []
         } else {
           return this.ofertasService.searchOfertas(this.oferta.nome)
         }

@@ -1,6 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { RouterModule } from '@angular/router';
@@ -38,7 +38,11 @@ import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
     FormsModule,
     RouterModule.forRoot(routs)
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID, useValue: 'pt-Br'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
