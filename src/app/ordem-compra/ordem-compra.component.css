@@ -1,0 +1,16 @@
+.btn-qtde {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    text-decoration: none;
+}
+
+.add {
+    top: 13px;
+    left: 80px;
+}
+
+.remove {
+    top: 13px;
+    left: 17px;
+}

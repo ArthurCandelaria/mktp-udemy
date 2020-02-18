@@ -188,4 +188,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  clearSearch() {
+    setTimeout(() => {
+      this.ofertas2 = []
+    }, 100);
+  }
+
 }

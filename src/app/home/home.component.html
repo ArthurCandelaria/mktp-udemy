@@ -13,9 +13,10 @@
       <div>
         <input type="text" class="form-control" aria-label="pesquisar" placeholder="pesquise por ofertas..."
           #variavelDeReferencia (keyup)="$event.key === 'Enter' ? getOfertasServices() : lengthPromoName()"
-          [(ngModel)]="oferta.nome">
+          [(ngModel)]="oferta.nome" (focusout)="clearSearch()">
         <ul class="list-group position-absolute col-12" style="z-index: 1; padding-right: 30px;">
-          <li *ngFor="let oferta2 of ofertas2" class="list-group-item reduceText w-100">{{oferta2.descricao_oferta | lowercase}}
+          <li *ngFor="let oferta2 of ofertas2" class="list-group-item reduceText w-100">
+            <a [routerLink]="['/oferta',oferta2.id]">{{oferta2.descricao_oferta | lowercase}}</a>
           </li>
         </ul>
       </div>
