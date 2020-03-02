@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="ordem-compra">
+  <div class="ordem-compra mb-2">
     <form novalidate>
 
       <h5>Sua Compra</h5>
-      <hr />
+      <br />
 
       <div class="form-row p-4 bg-light" style="border-bottom: solid 1px #F0F0F0">
         <div class="col-sm-1 d-flex align-items-center">
@@ -38,10 +38,12 @@
         </div>
       </div>
 
+      <hr />
+
       <br />
 
       <h5>Dados de entrega</h5>
-      <hr />
+      <!-- <hr /> -->
 
       <div class="form-row">
 
@@ -67,7 +69,7 @@
       <br />
 
       <h5>Dados de pagamento</h5>
-      <hr />
+      <!-- <hr /> -->
 
       <div class="form-row">
 
@@ -84,13 +86,6 @@
 
       <hr />
 
-      <div *ngIf="alertSuccess" class="alert alert-success alert-dismissible fade show">
-        <span [innerHTML]="msgAlert"></span>
-        <button (click)="closeAlert()" type="button" class="close">
-          <span>&times;</span>
-        </button>
-      </div>
-
       <div *ngIf="alertWarning" class="alert alert-warning alert-dismissible fade show">
         <span [innerHTML]="msgAlert"></span>
         <button (click)="closeAlert()" type="button" class="close">
@@ -105,7 +100,20 @@
         </button>
       </div>
 
-      <button type="submit" (click)="submit()" class="btn btn-primary btn-lg">Cofirmar compra</button>
+      <br />
+
+      <button id="confirmPayment" type="submit" (click)="submit()" class="btn btn-primary btn-lg w-100">Cofirmar compra</button>
     </form>
+
+    <br />
+
+    <div *ngIf="alertSuccess" class="alert alert-success alert-dismissible fade show">
+      <span>Compra realizada com sucesso!<br /><strong><a [routerLink]="['/compra/success', idPedido]">Clique
+            aqui</a></strong> para visualizar os detalhes do pedido</span>
+      <!-- <button (click)="closeAlert()" type="button" class="close">
+        <span>&times;</span>
+      </button> -->
+    </div>
+
   </div>
 </div>

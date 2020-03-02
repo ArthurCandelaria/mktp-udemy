@@ -1,15 +1,27 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class OrdemCompraService {
 
-  constructor() { }
+  url = 'http://localhost:3000'
+
+  constructor(private http: Http) { }
 
   efetivarCompra(endereco, numero, complemento, selectedPayment) {
-    console.log('endereço: ', endereco)
-    console.log('número: ', numero)
-    console.log('complemento: ', complemento)
-    console.log('forma de pagamento: ', selectedPayment.name)
+
+    const body = {
+      'endereco': endereco,
+      'numero': numero,
+      'complemento': complemento,
+      'selectedPayment': selectedPayment
+    }
+
+    return this.http.post(
+      `${this.url}/pedidos`,
+      body
+    ).map(res => (res.json()))
+
   }
 
 }

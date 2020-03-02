@@ -6,6 +6,7 @@ import { DiversaoComponent } from './diversao/diversao.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { OfertaComponent } from './oferta/oferta.component';
 import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
+import { OrdemCompraSuccessComponent } from './ordem-compra/ordem-compra-success/ordem-compra-success.component';
 import { Error404Component } from './error404/error404.component';
 
 export const routs: Routes = [
@@ -17,5 +18,6 @@ export const routs: Routes = [
     { path: 'oferta', component: HomeComponent },
     { path: 'oferta/:id', component: OfertaComponent },
     { path: 'compra', component: OrdemCompraComponent },
+    { path: 'compra/success/:id', component: OrdemCompraSuccessComponent },
     { path: '**', component: Error404Component }
 ]

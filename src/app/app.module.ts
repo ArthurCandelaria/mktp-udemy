@@ -18,6 +18,7 @@ import { Error404Component } from './error404/error404.component';
 import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
 import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
 import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
+import { OrdemCompraSuccessComponent } from './ordem-compra/ordem-compra-success/ordem-compra-success.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
     Error404Component,
     ComoUsarComponent,
     OndeFicaComponent,
-    OrdemCompraComponent
+    OrdemCompraComponent,
+    OrdemCompraSuccessComponent
   ],
   imports: [
     BrowserModule,

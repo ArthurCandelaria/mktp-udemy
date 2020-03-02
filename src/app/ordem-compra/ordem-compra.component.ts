@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { OrdemCompraService } from '../services/ordem-compra.service'
+import { ErrorService } from 'app/services/error.service'
+import $ from 'jquery';
 
 @Component({
   selector: 'app-ordem-compra',
   templateUrl: './ordem-compra.component.html',
   styleUrls: ['./ordem-compra.component.css'],
-  providers: [OrdemCompraService]
+  providers: [OrdemCompraService, ErrorService]
 })
 export class OrdemCompraComponent implements OnInit {
 
+  idPedido: any
   endereco = ''
   isEndereco = true
   numero = ''
@@ -27,7 +30,8 @@ export class OrdemCompraComponent implements OnInit {
   msgAlert: string
 
   constructor(
-    private ordemCompraService: OrdemCompraService
+    private ordemCompraService: OrdemCompraService,
+    private formatError: ErrorService
   ) { }
 
   ngOnInit() {
@@ -44,9 +48,20 @@ export class OrdemCompraComponent implements OnInit {
   submit() {
     this.closeAlert()
     if (this.validateInput()) {
-      this.ordemCompraService.efetivarCompra(this.endereco, this.numero, this.complemento, this.selectedPayment)
+      this.ordemCompraService.efetivarCompra(this.endereco, this.numero, this.complemento, this.selectedPayment).subscribe(
+        success => {
+          this.idPedido = success.id
+          this.alertSuccess = true
+          $("#confirmPayment").attr("disabled", true);
+        },
+        error => {
+          this.alertDanger = true
+          this.msgAlert = this.formatError.formatErrorResponse(error)
+          console.log('msg error: ', this.msgAlert)
+        }
+      )
     } else {
-      this.alertDanger = true
+      this.alertWarning = true
       this.msgAlert = '<strong>Ops!</strong> Identificamos um erro de preenchimento de dados. Por favor, revise os campos para tentar novamente.'
     }
   }
