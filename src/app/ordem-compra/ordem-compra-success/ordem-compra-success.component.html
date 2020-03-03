@@ -1,14 +1,33 @@
 <div class="container">
-  <div class="row" style="margin-top: 50px">
+  <div class="row mt-5">
     <div class="col d-flex justify-content-center">
-        <h3>Compra realizada com sucesso!</h3>
+      <h3>Número do pedido: {{id}}</h3>
     </div>
   </div>
-  
-  <div class="row" style="margin-top: 50px">
-      <div class="col d-flex justify-content-center">
-          <p>O número do seu pedido é <b> ID DO PEDIDO </b></p>
-      </div>
-    </div>
-  
+
+  <br />
+
+  <div class="bg-light p-5">
+    <h5>Detalhes da compra</h5>
+
+    <br />
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Endereço</th>
+          <th scope="col">Número</th>
+          <th scope="col">Complemento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{compra[0].endereco}}</td>
+          <td>{{compra[0].numero}}</td>
+          <td>{{complemento[0].complemento}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>

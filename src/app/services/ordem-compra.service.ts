@@ -17,11 +17,14 @@ export class OrdemCompraService {
       'selectedPayment': selectedPayment
     }
 
-    return this.http.post(
-      `${this.url}/pedidos`,
-      body
-    ).map(res => (res.json()))
+    return this.http.post(`${this.url}/pedidos`, body)
+      .map(res => (res.json()))
 
+  }
+
+  getCompraDetalhe(endpoint) {
+    return this.http.get(this.url + endpoint).retry(10)
+      .map(res => res.json())
   }
 
 }
