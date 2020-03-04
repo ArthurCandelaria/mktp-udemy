@@ -8,7 +8,7 @@
   <br />
 
   <div class="bg-light p-5">
-    <h5>Detalhes da compra</h5>
+    <h5>Detalhes do pedido</h5>
 
     <br />
 
@@ -16,15 +16,16 @@
       <thead>
         <tr>
           <th scope="col">Endereço</th>
-          <th scope="col">Número</th>
-          <th scope="col">Complemento</th>
+          <th class="text-center" scope="col">Número</th>
+          <th class="text-center" scope="col">Complemento</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>{{compra[0].endereco}}</td>
-          <td>{{compra[0].numero}}</td>
-          <td>{{complemento[0].complemento}}</td>
+          <td class="text-center">{{compra[0].numero}}</td>
+          <td class="text-center" *ngIf="compra[0].complemento.length == 0">--</td>
+          <td class="text-center" *ngIf="compra[0].complemento.length > 0">{{compra[0].complemento}}</td>
         </tr>
       </tbody>
     </table>

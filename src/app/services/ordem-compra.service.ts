@@ -18,7 +18,7 @@ export class OrdemCompraService {
     }
 
     return this.http.post(`${this.url}/pedidos`, body)
-      .map(res => (res.json()))
+      .map(res => res.json())
 
   }
 
