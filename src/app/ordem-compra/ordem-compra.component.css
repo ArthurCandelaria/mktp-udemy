@@ -14,3 +14,53 @@
     top: 13px;
     left: 17px;
 }
+
+.invalid-feedback {
+    display: block !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #008578;
+    border-color: #008578;
+  }
+  
+  .btn-primary:hover {
+    color: #fff;
+    background-color: #49c5b1;
+    border-color: #49c5b1;
+  }
+
+/* espaço entre a declaração das classes faz diferença! */
+
+input.ng-invalid.ng-touched {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + .75rem);
+    background-repeat: no-repeat;
+    background-position: center right calc(.375em + .1875rem);
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+input.ng-valid.ng-touched {
+    border-color: #20c997;
+    padding-right: calc(1.5em + .75rem);
+    background-repeat: no-repeat;
+    background-position: center right calc(.375em + .1875rem);
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+select.ng-touched {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + .75rem);
+    background-repeat: no-repeat;
+    background-position: center right calc(.375em + .1875rem);
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+select.ng-touched.ng-dirty {
+    border-color: #20c997;
+    padding-right: calc(1.5em + .75rem);
+    background-repeat: no-repeat;
+    background-position: center right calc(.375em + .1875rem);
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
