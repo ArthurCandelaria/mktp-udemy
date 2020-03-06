@@ -33,7 +33,7 @@
 
 /* espaço entre a declaração das classes faz diferença! */
 
-input.ng-invalid.ng-touched {
+/* input.ng-invalid.ng-touched {
     border-color: #dc3545;
     padding-right: calc(1.5em + .75rem);
     background-repeat: no-repeat;
@@ -63,4 +63,4 @@ select.ng-touched.ng-dirty {
     background-repeat: no-repeat;
     background-position: center right calc(.375em + .1875rem);
     background-size: calc(.75em + .375rem) calc(.75em + .375rem);
-}
+} */
