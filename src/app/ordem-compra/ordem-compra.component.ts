@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { OrdemCompraService } from '../services/ordem-compra.service'
 import { ErrorService } from 'app/services/error.service'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-ordem-compra',
@@ -10,6 +11,12 @@ import { ErrorService } from 'app/services/error.service'
 })
 export class OrdemCompraComponent implements OnInit {
 
+  formulario: FormGroup = new FormGroup({
+    'endereco': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(120)]),
+    'numero': new FormControl(null, [Validators.required, Validators.min(1), Validators.maxLength(6)]),
+    'complemento': new FormControl(null, []),
+    'formaPagamento': new FormControl(Validators.required)
+  })
   idPedido: number
   formasPagamento = [
     { name: 'Boleto' },
@@ -30,43 +37,8 @@ export class OrdemCompraComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitCompra(formulario) {
-    this.closeAlert()
-    if (this.checkInputs(formulario)) {
-      this.ordemCompraService.efetivarCompra(
-        formulario.value.endereco,
-        formulario.value.numero,
-        formulario.value.complemento,
-        formulario.value.formaPagamento)
-        .subscribe(
-          success => {
-            this.idPedido = success.id
-            this.alertSuccess = true
-          },
-          error => {
-            this.alertDanger = true
-            this.msgAlert = this.formatError.formatErrorResponse(error)
-          }
-        )
-    } else {
-      this.alertWarning = true
-      this.msgAlert = '<strong>Ops!</strong> Identificamos um erro de preenchimento de dados. Por favor, revise os campos para tentar novamente.'
-    }
-  }
-
-  checkInputs(formulario) {
-    let send = true
-    if (formulario.value.endereco.length == 0 || formulario.value.numero == 0 || formulario.value.formaPagamento == 0) {
-      send = false
-    }
-    return send
-  }
-
-  closeAlert() {
-    this.alertSuccess = false
-    this.alertWarning = false
-    this.alertDanger = false
-    this.msgAlert = ''
+  confirmarCompra() {
+    console.log(this.formulario)
   }
 
 }

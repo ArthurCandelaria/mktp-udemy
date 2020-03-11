@@ -1,6 +1,6 @@
 <div class="container">
   <div class="ordem-compra mb-2">
-    <!-- <form> -->
+    <form [formGroup]="formulario" novalidate (ngSubmit)="confirmarCompra()">
 
       <h5>Sua Compra</h5>
       <br />
@@ -48,20 +48,22 @@
       <div class="form-row">
 
         <div class="form-group col-md-6">
-          <input type="text" class="form-control" placeholder="Endereço" autocomplete="off" minlength="3" required
-            name="endereco" ngModel #inputEndereco="ngModel">
-          <div *ngIf="inputEndereco.invalid && inputEndereco.touched" class="invalid-feedback">Endereço inválido</div>
+          <input
+            [ngClass]="{'is-valid' : formulario.get('endereco').valid, 'is-invalid' : formulario.get('endereco').invalid && formulario.get('endereco').touched}"
+            type="text" class="form-control" placeholder="Endereço" autocomplete="off" formControlName="endereco">
+          <div class="invalid-feedback"
+            *ngIf="formulario.get('endereco').invalid && formulario.get('endereco').touched">Endereço inválido</div>
         </div>
 
         <div class="form-group col-md-2">
-          <input type="number" class="form-control" placeholder="Número" autocomplete="off" min="0" minlength="1"
-            required name="numero" ngModel #inputNumero="ngModel">
-          <div *ngIf="inputNumero.invalid && inputNumero.touched" class="invalid-feedback">Número inválido</div>
+          <input type="number" class="form-control" placeholder="Número" autocomplete="off" formControlName="numero">
+          <div class="invalid-feedback" *ngIf="formulario.get('numero').invalid && formulario.get('numero'). touched">
+            Número inválido</div>
         </div>
 
         <div class="form-group col-md-4">
-          <input type="text" class="form-control" placeholder="Complemento" autocomplete="off" name="complemento"
-            ngModel>
+          <input type="text" class="form-control" placeholder="Complemento" autocomplete="off"
+            formControlName="complemento">
         </div>
 
       </div>
@@ -72,15 +74,16 @@
       <div class="form-row">
 
         <div class="form-group col-md-3">
-          <select class="form-control" name="formaPagamento" ngModel #selectPagamento="ngModel">
+          <select class="form-control" formControlName="formaPagamento">
             <option hidden value="">Forma de pagamento</option>
             <option *ngFor="let pagamento of formasPagamento" [value]="pagamento.name">{{pagamento.name}}</option>
           </select>
 
-          <div *ngIf="selectPagamento.touched && selectPagamento.pristine" class="invalid-feedback">Selecione uma forma
-            de pagamento</div>
+          <div class="invalid-feedback"
+            *ngIf="formulario.get('formaPagamento').touched && formulario.get('formaPagamento').pristine">Selecione uma
+            forma de pagamento</div>
         </div>
-        
+
       </div>
 
       <hr />
@@ -103,7 +106,7 @@
 
       <button id="confirmPayment" type="submit" ngSubmit class="btn btn-primary btn-lg w-100">Cofirmar compra</button>
 
-    <!-- </form> -->
+    </form>
 
     <br />
 
