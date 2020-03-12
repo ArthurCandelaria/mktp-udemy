@@ -28,6 +28,7 @@ export class OrdemCompraComponent implements OnInit {
   alertWarning: boolean
   alertDanger: boolean
   msgAlert: string
+  isLoading: boolean
 
   constructor(
     private ordemCompraService: OrdemCompraService,
@@ -38,7 +39,52 @@ export class OrdemCompraComponent implements OnInit {
   }
 
   confirmarCompra() {
-    console.log(this.formulario)
+
+    this.resetAlerts()
+
+    if (this.formulario.status == 'INVALID') {
+
+      console.log('forumario invalido!')
+
+      this.alertWarning = true
+      this.msgAlert = '<strong>Ops!</strong><br />Verifique se todos os campos foram preenchidos corretamente.'
+
+      this.formulario.get('endereco').markAsTouched()
+      this.formulario.get('numero').markAsTouched()
+      this.formulario.get('complemento').markAsTouched()
+      this.formulario.get('formaPagamento').markAsTouched()
+    } else {
+
+      this.isLoading = true
+      console.log('formulario valido')
+
+      this.ordemCompraService.efetivarCompra(
+        this.formulario.value.endereco,
+        this.formulario.value.numero,
+        this.formulario.value.complemento,
+        this.formulario.value.formaPagamento)
+        .finally(() => this.isLoading = false)
+        .subscribe(
+          success => {
+            console.log(success)
+            this.idPedido = success.id
+            this.alertSuccess = true
+          },
+          error => {
+            console.log(error)
+            this.alertWarning = true
+            this.msgAlert = this.formatError.formatErrorResponse(error)
+          }
+        )
+    }
+
+  }
+
+  resetAlerts() {
+    this.alertSuccess = false
+    this.alertWarning = false
+    this.alertDanger = false
+    this.msgAlert = ''
   }
 
 }
