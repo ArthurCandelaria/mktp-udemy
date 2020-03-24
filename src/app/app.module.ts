@@ -19,6 +19,7 @@ import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
 import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
 import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
 import { OrdemCompraSuccessComponent } from './ordem-compra/ordem-compra-success/ordem-compra-success.component';
+import { CarrinhoService } from './services/carrinho.service';
 
 @NgModule({
   declarations: [
@@ -44,9 +45,8 @@ import { OrdemCompraSuccessComponent } from './ordem-compra/ordem-compra-success
     RouterModule.forRoot(routs)
   ],
   providers: [
-    {
-      provide: LOCALE_ID, useValue: 'pt-Br'
-    }
+    CarrinhoService,
+    { provide: LOCALE_ID, useValue: 'pt-Br' }
   ],
   bootstrap: [AppComponent]
 })

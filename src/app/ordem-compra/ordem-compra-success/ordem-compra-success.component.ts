@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 // import { OfertasService } from 'app/services/ofertas.services';
 import { ErrorService } from 'app/services/error.service';
 import { OrdemCompraService } from 'app/services/ordem-compra.service';
+// import { CarrinhoService } from 'app/services/carrinho.service';
 
 @Component({
   selector: 'app-ordem-compra-success',
@@ -21,6 +22,7 @@ export class OrdemCompraSuccessComponent implements OnInit {
   constructor(
     private router: ActivatedRoute,
     private ordemCompraService: OrdemCompraService,
+    // private carrinhoService: CarrinhoService,
     private formatError: ErrorService
   ) { }
 

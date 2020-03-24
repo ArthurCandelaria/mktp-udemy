@@ -5,14 +5,14 @@
       <h5>Sua Compra</h5>
       <br />
 
-      <div class="form-row p-4 bg-light" style="border-bottom: solid 1px #F0F0F0">
+      <div *ngFor="let item of itensCompra" class="form-row p-4 bg-light" style="border-bottom: solid 1px #F0F0F0">
         <div class="col-sm-1 d-flex align-items-center">
-          <img src="/assets/ofertas/1/img1.jpg" class="img-fluid">
+          <img src="{{item.imagens[0].url}}" class="img-fluid">
         </div>
         <div class="col-sm-6 d-flex align-items-center">
-          Super Burger
+          {{item.titulo}}
           <br />
-          Rodízio de Mini-hambúrger com opção de entrada.
+          {{item.descricao_oferta}}
         </div>
 
         <div class="col-sm-2 d-flex align-items-center">

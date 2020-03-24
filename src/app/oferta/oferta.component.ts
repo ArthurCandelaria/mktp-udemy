@@ -3,6 +3,7 @@ import { OfertasService } from './../services/ofertas.services';
 import { ActivatedRoute } from '@angular/router';
 import { TopoComponent } from '../topo/topo.component';
 import { ErrorService } from './../services/error.service';
+import { CarrinhoService } from 'app/services/carrinho.service';
 // import { Observable } from 'rxjs/Observable';
 // import { Observer } from 'rxjs/Observer';
 // import { Subscription } from 'rxjs/Subscription';
@@ -31,7 +32,8 @@ export class OfertaComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private ofertasService: OfertasService,
     private formatError: ErrorService,
-    public topoComponent: TopoComponent
+    public topoComponent: TopoComponent,
+    public carrinhoService: CarrinhoService
   ) { }
 
   ngOnInit() {
@@ -105,9 +107,8 @@ export class OfertaComponent implements OnInit, OnDestroy {
     imgView.setAttribute('src', srcImage)
   }
 
-  implementCarrinho(event) {
-    this.topoComponent.carrinho.push(event)
-    console.log(this.topoComponent.carrinho)
+  addItenCarrinho() {
+    this.carrinhoService.incluirOferta(this.oferta)
   }
 
 }

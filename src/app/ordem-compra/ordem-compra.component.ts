@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { OrdemCompraService } from '../services/ordem-compra.service'
 import { ErrorService } from 'app/services/error.service'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { CarrinhoService } from 'app/services/carrinho.service'
 
 @Component({
   selector: 'app-ordem-compra',
@@ -29,13 +30,17 @@ export class OrdemCompraComponent implements OnInit {
   alertDanger: boolean
   msgAlert: string
   isLoading: boolean
+  itensCompra = []
 
   constructor(
     private ordemCompraService: OrdemCompraService,
-    private formatError: ErrorService
+    private formatError: ErrorService,
+    private carrinhoService: CarrinhoService
   ) { }
 
   ngOnInit() {
+    this.itensCompra = this.carrinhoService.exibirItens()
+    console.log(this.itensCompra)
   }
 
   confirmarCompra() {
